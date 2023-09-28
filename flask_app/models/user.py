@@ -92,13 +92,25 @@ class User:
   
     # MODEL function
     @classmethod
+    # def search(cls, data):
+    #     tipo = type(data)
+    #     print("DATA TYPE", tipo ) #DATA TYPE <class 'str'>
+    #     instance_results = []
+    #     query = "SELECT * FROM users WHERE first_name LIKE %s ORDER BY id DESC"
+    #     results = connectToMySQL('lab_bd').query_db(query, (data + '%',))
+    #     print("RESULTADOS de mi query", results)
+    #     for result in results:
+    #         instancia = cls(result)
+    #         instance_results.append(instancia)
+    #     return instance_results
+    # Try this
     def search(cls, data):
-        tipo = type(data)
-        print("DATA TYPE", tipo ) #DATA TYPE <class 'str'>
         instance_results = []
         query = "SELECT * FROM users WHERE first_name LIKE %s ORDER BY id DESC"
-        results = connectToMySQL('lab_bd').query_db(query, (data + '%',))
-        print("RESULTADOS de mi query", results)
+        # Make sure to properly format the data for the SQL query
+        search_data = f"{data}%"
+        # Pass the data as a tuple to the query_db function
+        results = connectToMySQL('lab_bd').query_db(query, (search_data,))
         for result in results:
             instancia = cls(result)
             instance_results.append(instancia)

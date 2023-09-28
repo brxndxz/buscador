@@ -4,7 +4,7 @@ from flask_app.models.user import User
 
 @app.route("/")
 def show_index():
-    return render_template("index.html")
+    return render_template("home.html")
 
 @app.route("/register")
 def show_register():
